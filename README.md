@@ -1,3 +1,4 @@
+cat > README.md << 'EOF'
 # Student List Project - Docker Infrastructure
 
 ## 📋 Description
@@ -5,11 +6,11 @@ Ce projet démontre la containerisation d'une application multi-services avec Do
 
 ## 🏗️ Architecture
 - **API Flask** (Python) - Service REST avec authentification basique
-- **Frontend PHP/Apache** - Interface utilisateur web
+- **Frontend PHP/Apache** - Interface utilisateur web  
 - **Registry Docker privé** - Gestion des images Docker
 - **Réseau Docker** - Communication inter-conteneurs
 
-## 🚀 Déploiement
+## 🚀 Déploiement Rapide
 
 ### Développement
 ```bash
