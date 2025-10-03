@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  api:
+    image: localhost:5000/student-api:latest
+    container_name: student-api-production
+    volumes:
+      - ./student_age.json:/data/student_age.json
+    ports:
+      - "5002:5000"
+    networks:
+      - student-network
+    restart: unless-stopped
+
+  website:
+    image: php:apache
+    container_name: student-website-production
+    environment:
+      - USERNAME=toto
+      - PASSWORD=python
+    volumes:
+      - ./website:/var/www/html
+    ports:
+      - "8082:80"
+    depends_on:
+      - api
+    networks:
+      - student-network
+    restart: unless-stopped
+
+networks:
+  student-network:
+    driver: bridge

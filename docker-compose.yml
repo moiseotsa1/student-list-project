@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # Service API Flask
+  api:
+     image: localhost:5000/student-api:latest
+    container_name: student-api
+    volumes:
+      - ./student_age.json:/data/student_age.json
+    ports:
+      - "5001:5000"
+    networks:
+      - student-network
+    restart: unless-stopped
+
+  # Service Web PHP
+  website:
+    image: php:apache
+    container_name: student-website
+    environment:
+      - USERNAME=toto
+      - PASSWORD=python
+    volumes:
+      - ./website:/var/www/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+    networks:
+      - student-network
+    restart: unless-stopped
+
+# Réseau dédié pour la communication entre les conteneurs
+networks:
+  student-network:
+    driver: bridge
